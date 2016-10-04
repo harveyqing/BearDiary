@@ -1,26 +1,26 @@
 <!--mine.wxml-->
 
 <template name="tab1">
-    <view style="width:100%;height:500px;background:red;">
+    <view>
     </view>
 </template>
 
 <template name="tab2">
-    <view style="width:100%;height:500px;background:green;">
+    <view>
     </view>
 </template>
 
 <template name="tab3">
-    <view style="width:100%;height:500px;background:blue;">
+    <view>
     </view>
 </template>
 
 <template name="tab4">
-    <view style="width:100%;height:500px;background:black;">
+    <view>
     </view>
 </template>
 
-<view class="container">
+<view>
 
     <!--一个全屏模态对话框-->
     <view class="modal" style="{{modalShowStyle}}">
@@ -38,38 +38,28 @@
         </view>
     </view>
 
-    <view class="mine-header">
-
-        <view class="mine-profile">
-            <image class="mine-avatar" mode="aspectFit" src="http://tva3.sinaimg.cn/crop.0.0.540.540.50/6cbb1ee0jw8ej0zou5e71j20f00f0q3b.jpg">
-            </image>
-            <view class="mine-description">
-                <view class="mine-user">
-                    <view class="mine-text">
-                        小闹钟
-                    </view>
-                    <view class="mine-text">
-                        ♂
-                    </view>
-                </view>
-                <view class="mine-meta">
-                    一篇日记
-                </view>
-            </view>
-            <image class="mine-message" mode="aspectFill" src="../../images/icons/user_privatemsg.png" bindtap="touchMsg"></image>
+  <view class="header">
+    <view class="profile">
+      <image class="avatar" mode="aspectFit" src="{{userInfo.avatar}}"></image>
+      <view class="description">
+        <view class="item">
+          <view style="margin-right:5px">{{userInfo.nickname}}</view>
+          <view>{{userInfo.sex}}</view>
         </view>
-
-        <view class="mine-tab">
-            <view wx:for="{{tabs}}" wx:for-index="idx" class="tab" bindtap="touchTab" style="{{item.extraStyle}}" id="{{idx}}">
-                <view class="tab-content" style="color:{{highLightIndex == idx ? '#54BFE2' : ''}};">
-                    <image class="tab-image" mode="aspectFit" src="{{highLightIndex == idx ? item.iconActive : item.icon}}">
-                    </image>
-                    <view style="margin-top:2px;">{{item.title}}</view>
-                    </view>
-                </view>
-        </view>
-
+        <view class="item">{{userInfo.meta}}</view>
+      </view>
+      <image class="add" mode="aspectFill" src="../../images/icons/add.png" bindtap="touchAdd"></image>
     </view>
 
-    <template is="{{currentTab}}" />
+    <view class="tablist">
+      <view wx:for="{{tabs}}" wx:for-index="idx" class="tab" bindtap="touchTab" style="{{item.extraStyle}}" id="{{idx}}">
+        <view class="content" style="color:{{highLightIndex == idx ? '#54BFE2' : ''}};">
+          <image class="image" mode="aspectFit" src="{{highLightIndex == idx ? item.iconActive : item.icon}}"></image>
+          <view style="margin-top:2px;">{{item.title}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+    <template is="{{currentTab}}"></template>
 </view>

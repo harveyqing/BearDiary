@@ -3,11 +3,11 @@
  全局样式
 **/
 
-page {
-    width: 100%;
-    padding: 0;
-    background-color: #eceff4;
-    font-size: 30rpx;
-    font-family: -apple-system-font, 'Helvetica Neue', Helvetica, 'Microsoft YaHei', sans-serif;
+  page {
+  width: 100%;
+  padding: 0;
+  background-color: #eceff4;
+  font-size: 30rpx;
+  font-family: -apple-system-font, 'Helvetica Neue', Helvetica, 'Microsoft YaHei', sans-serif;
 
 }

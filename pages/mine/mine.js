@@ -28,6 +28,12 @@ var tabs = [
         "extraStyle": "border:none;",
     },
 ]
+var userInfo = {
+    avatar: "http://tva3.sinaimg.cn/crop.0.0.540.540.50/6cbb1ee0jw8ej0zou5e71j20f00f0q3b.jpg",
+    nickname: "小闹钟",
+    sex: "♂",  // 0, male; 1, female
+    meta: '1篇日记',
+}
 
 
 Page({
@@ -40,6 +46,7 @@ Page({
         highLightIndex: "0",
         modalShowStyle: "",  // 模态对话框样式 
         dairyTitle: "",  // 日记标题
+        userInfo: userInfo,
     },
 
     // events
@@ -55,7 +62,7 @@ Page({
     },
 
     // 点击新建日记按钮
-    touchMsg: function (event) {
+    touchAdd: function (event) {
         this.setData({
             modalShowStyle: "opacity:1;pointer-events:auto;"
         })
@@ -63,9 +70,15 @@ Page({
 
     // 新建日记
     touchAddNew: function(event) {
+        // 先隐藏模态框
+        this.setData({
+            modalShowStyle: "",
+            dairyTitle: "",
+        })
+
         wx.navigateTo({
             url: "../new/new"
-        })
+        });
     },
 
     // 取消标题输入

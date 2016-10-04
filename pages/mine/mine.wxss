@@ -1,29 +1,49 @@
 /**mine.wxss**/
 
-.mine-header {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    width: 100%;
-    height: 130px;
-    background: white;
-    margin: 0;
-    padding: 0;
+.header {
+  height: 130px;
+  background: white;
 }
 
-.mine-profile {
+.header .profile {
+  height: 50%;
+}
+
+.profile .avatar {
+  width: 50px;
+  height: 50px;
+  float: left;
+  margin: 7.5px 10px;
+  border-radius: 25px;
+}
+
+.profile .description {
+  display: inline-block;
+  margin: 7.5px auto;
+  height: 50px;
+}
+
+.description .item {
     height: 50%;
+    display: flex;
+    align-items: center;
 }
 
-.mine-tab {
+.profile .add {
+    float: right;
+    margin: 15px 10px;
+    height: 35px;
+    width: 35px;
+}
+
+.header .tablist {
     height: 50%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.tab {
+.tablist .tab {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -33,55 +53,17 @@
     border-right: 1px solid #eceff4;
 }
 
-.tab-content {
+.tab .content{
     width: 25px;
     height: 50px;
     font-size: 12px;
     color: #B3B3B3;
 }
 
-.tab-image {
+.tab .image {
     width: 25px;
     height: 25px;
     margin-top: 10px;
-}
-
-.mine-avatar {
-    width: 50px;
-    height: 50px;
-    display: inline-block;
-    float: left;
-    margin: 7.5px 10px;
-    border-radius: 25px;
-}
-
-.mine-description {
-    display: inline-block;
-    float: left;
-    margin: 7.5px auto;
-    height: 50px;
-    width: 150px;
-}
-
-.mine-message {
-    display: inline-block;
-    float: right;
-    margin: 15px 10px;
-    height: 35px;
-    width: 35px;
-}
-
-.mine-user {
-    height: 50%;
-}
-
-.mine-meta {
-    height: 50%;
-}
-
-.mine-text {
-    float: left;
-    margin-right: 5px;
 }
 
 .modal {

@@ -1,10 +1,10 @@
 {
   "pages":[
-    "pages/index/index",
+    "pages/list/list",
     "pages/mine/mine",
     "pages/compose/compose",
-    "pages/diary/diary",
-    "pages/new/new"
+    "pages/new/new",
+    "pages/item/item"
   ],
   "window":{
     "backgroundTextStyle": "light",
@@ -20,16 +20,10 @@
     "borderStyle": "black",
     "list":[
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/list/list",
         "iconPath": "images/icons/mark.png",
         "selectedIconPath": "images/icons/markHL.png",
         "text": "印记"
-      },
-      {
-        "pagePath": "pages/compose/compose",
-        "iconPath": "images/icons/strategy.png",
-        "selectedIconPath": "images/icons/strategyHL.png",
-        "text": "攻略"
       },
       {
         "pagePath": "pages/mine/mine",

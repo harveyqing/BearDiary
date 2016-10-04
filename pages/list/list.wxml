@@ -1,13 +1,13 @@
 <!--mark.wxml-->
 
 <view wx:for="{{diaries}}" wx:for-index="idx">
-  <navigator url="../diary/diary" class="inner">
+  <navigator url="../item/item?id={{idx}}" class="inner">
     <image class="cover" mode="aspectFit" src="{{item.image}}"></image>
     <view class="title">{{item.title}}</view>
-    <view class="mark-meta">
+    <view class="meta">
       {{item.meta}}
     </view>
-    <image class="mark-user" mode="aspectFit" src="{{item.avatar}}">
+    <image class="avatar" mode="aspectFit" src="{{item.avatar}}">
     </image>
   </navigator>
 </view>

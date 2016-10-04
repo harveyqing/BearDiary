@@ -1,0 +1,39 @@
+/** list.wxss **/
+
+.inner {
+  margin: 0 8rpx 8rpx 8rpx;
+  position: relative;
+}
+
+.cover {
+  width: 100%;
+  height: 400rpx;
+}
+
+.title {
+  margin-top: 80rpx;
+  font-size: 36rpx;
+  font-weight: normal;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.meta {
+  margin: 20rpx 0;
+  font-size: 24rpx;
+  text-align: center;
+  color: #999;
+}
+
+.avatar {
+  width: 70px;
+  height: 70px;
+  position: absolute;
+  left: 50%;
+  top: 70%;
+  margin-left: -35px;
+  margin-top: -35px;
+  border-radius: 35px;
+}

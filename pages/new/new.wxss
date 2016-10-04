@@ -1,29 +1,31 @@
+/** new.wxss **/
+
 .container {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
-.footer-tab {
+.tabbar {
     position: fixed;
     width: 100%;
     height: 80rpx;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: black;
+    background-color: white;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-.footer-tab .item {
-    width: 33.3%;
+.tabbar .item {
+    width: 33.33%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .item .icon {
-    width: 40rpx;
-    height: 40rpx;
+    width: 50rpx;
+    height: 50rpx;
 }
