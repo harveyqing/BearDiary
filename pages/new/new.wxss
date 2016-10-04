@@ -1,0 +1,29 @@
+.container {
+    width: 100%;
+    height: 100%;
+}
+
+.footer-tab {
+    position: fixed;
+    width: 100%;
+    height: 80rpx;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.footer-tab .item {
+    width: 33.3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.item .icon {
+    width: 40rpx;
+    height: 40rpx;
+}

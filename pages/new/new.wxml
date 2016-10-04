@@ -1,0 +1,13 @@
+<view class="container">
+</view>
+<view class="footer-tab">
+    <view class="item">
+        <image class="icon" mode="aspectFit" src="../../images/nav/comment.png"></image>
+    </view>
+    <view class="item">
+        <image class="icon" mode="aspectFit" src="../../images/nav/fav.png"></image>
+    </view>
+    <view class="item">
+        <image class="icon" mode="aspectFit" src="../../images/nav/share.png"></image>
+    </view>
+</view>

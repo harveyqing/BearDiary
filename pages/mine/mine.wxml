@@ -1,0 +1,75 @@
+<!--mine.wxml-->
+
+<template name="tab1">
+    <view style="width:100%;height:500px;background:red;">
+    </view>
+</template>
+
+<template name="tab2">
+    <view style="width:100%;height:500px;background:green;">
+    </view>
+</template>
+
+<template name="tab3">
+    <view style="width:100%;height:500px;background:blue;">
+    </view>
+</template>
+
+<template name="tab4">
+    <view style="width:100%;height:500px;background:black;">
+    </view>
+</template>
+
+<view class="container">
+
+    <!--一个全屏模态对话框-->
+    <view class="modal" style="{{modalShowStyle}}">
+        <view class="dialog">
+            <view class="modal-item" style="display:flex;justify-content:center;align-items:center;">
+            请输入日记标题
+            </view>
+            <view class="modal-item" style="margin:0 auto;width:90%;">
+                <input type="text" bindinput="titleInput" style="background-color:white;border-radius:2px;" value="{{dairyTitle}}" placeholder="请输入日记标题"></input>
+            </view>
+            <view class="modal-button" style="width:100%">
+                <view style="color:green;border-right:1px solid #E5E7ED;" bindtap="touchAddNew">确定</view>
+                <view bindtap="touchCancel">取消</view>
+            </view>
+        </view>
+    </view>
+
+    <view class="mine-header">
+
+        <view class="mine-profile">
+            <image class="mine-avatar" mode="aspectFit" src="http://tva3.sinaimg.cn/crop.0.0.540.540.50/6cbb1ee0jw8ej0zou5e71j20f00f0q3b.jpg">
+            </image>
+            <view class="mine-description">
+                <view class="mine-user">
+                    <view class="mine-text">
+                        小闹钟
+                    </view>
+                    <view class="mine-text">
+                        ♂
+                    </view>
+                </view>
+                <view class="mine-meta">
+                    一篇日记
+                </view>
+            </view>
+            <image class="mine-message" mode="aspectFill" src="../../images/icons/user_privatemsg.png" bindtap="touchMsg"></image>
+        </view>
+
+        <view class="mine-tab">
+            <view wx:for="{{tabs}}" wx:for-index="idx" class="tab" bindtap="touchTab" style="{{item.extraStyle}}" id="{{idx}}">
+                <view class="tab-content" style="color:{{highLightIndex == idx ? '#54BFE2' : ''}};">
+                    <image class="tab-image" mode="aspectFit" src="{{highLightIndex == idx ? item.iconActive : item.icon}}">
+                    </image>
+                    <view style="margin-top:2px;">{{item.title}}</view>
+                    </view>
+                </view>
+        </view>
+
+    </view>
+
+    <template is="{{currentTab}}" />
+</view>

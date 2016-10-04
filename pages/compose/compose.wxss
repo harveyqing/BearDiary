@@ -1,0 +1,21 @@
+/*compose.wxss*/
+
+.container {
+    background-color: #eceff4;
+    background-image: linear-gradient(#E1E6EA .1em, transparent .1em);
+    background-size: 100% 48rpx;
+    min-height:100%;
+    padding: 0;
+    box-sizing: border-box;
+    margin: 0 10rpx;
+}
+
+.compose-input {
+    height: 48rpx;
+    min-height: 48rpx;
+    font-size: 28rpx;
+    line-height: 28rpx;
+    font-family: "sans-serif";
+    background: none;
+    margin: 0px;
+}

@@ -1,0 +1,5 @@
+<!--compose.wxml-->
+
+<view class="container">
+    <input type="text" wx:for="{{lines}}" wx:for-index="idx" id="input-{{idx}}" class="compose-input" placeholder="" bindinput="userInput" bindchange="userInputChange" value="{{item}}" auto-focus="{{idx == row ? true : false}}" />
+</view>

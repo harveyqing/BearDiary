@@ -1,0 +1,90 @@
+<!--dairy.wxml-->
+
+<!--单条内容-->
+<template name="content-item">
+    <block wx:if="{{content.type == 'TEXT'}}">
+        <view style="margin-top:30rpx">
+            <text wx:if="{{content.type == 'TEXT'}}" class="dairy__content__text">{{content.content}}</text>
+        </view>
+    </block>
+    <block wx:if="{{content.type == 'IMAGE'}}">
+        <image class="dairy__content__image" mode="aspectFill" src="{{content.content}}"></image>
+        <view style="margin-top: 10rpx">{{content.description}}</view>
+    </block>
+    <block wx:if="{{content.type == 'VIDEO'}}">
+        <video class="dairy__content__image" src="{{content.content}}" binderror="videoErrorCallback"></video>
+    </block>
+    <template is="content-footer" data="{{content}}"></template>
+</template>
+
+<template name="content-footer">
+    <view class="dairy__content__footer">
+        <view class="dairy__footer__blockl">
+            <image mode="aspectFit" src="../../images/icons/poi.png" style="width:20rpx;height:20rpx;">
+            </image>
+            <text style="margin-left:10rpx;">{{content.poi.name}}</text>
+        </view>
+        <view class="dairy__footer__blockr">
+            <image mode="aspectFit" src="../../images/icons/comment.png" style="width:20rpx;height:20rpx;margin:10rpx">
+            </image>
+            <text style="font-size:20rpx;padding:10rpx 10rpx 10rpx 0;">{{content.commentNum}}</text>
+        </view>
+        <view class="dairy__footer__blockr">
+            <image mode="aspectFit" src="../../images/icons/like.png" style="width:20rpx;height:20rpx;margin:10rpx">
+            </image>
+            <text style="font-size:20rpx;padding:10rpx 10rpx 10rpx 0;">{{content.likeNum}}</text>
+        </view>
+    </view>
+</template>
+
+<view class="container">
+    <view class="dairy__header" style="background-image:url({{dairy.meta.cover}})">
+        <!--顶部固定工具栏-->
+        <view class="dairy__bar">
+            <image class="bar__item" mode="aspectFit" src="../../images/nav/comment.png">
+            </image>
+            <image class="bar__item" mode="aspectFit" src="../../images/nav/share.png">
+            </image>
+            <image class="bar__item" mode="aspectFit" src="../../images/nav/fav.png">
+            </image>
+            <image class="bar__item" mode="aspectFit" src="../../images/nav/download.png">
+            </image>
+        </view>
+
+        <!--日记meta信息区-->
+        <view class="dairy__title">
+            <image class="dairy__avatar" mode="aspectFit" src="{{dairy.meta.avatar}}">
+            </image>
+            <view class="dairy__desc">
+                <view class="dairy__desc__item">
+                {{dairy.meta.title}}
+                </view>
+                <view class="dairy__desc__item">
+                {{dairy.meta.meta}}
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <!--日记正文-->
+    <view wx:for="{{dairy.lists}}" wx:for-item="content" class="dairy__content__container">
+        <template is="content-item" data="{{content}}"></template>
+    </view>
+
+    <view class="dairy__footer">
+        <view class="dairy__footer__container">
+            <view class="dairy__footer__item" style="font-size:50rpx;">
+                <view style="display:inline-block">
+                THE
+                </view>
+                <view style="display:inline-block;margin-left:10rpx;color:#2EA1CA;">
+                END
+                </view>
+            </view>
+            <view class="dairy__footer__item" style="font-size:24rpx;color:gray">
+            DESIGNED BY 小闹钟
+            </view>
+        </view>
+    </view>
+   
+</view>
