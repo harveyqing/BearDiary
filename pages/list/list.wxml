@@ -1,13 +1,15 @@
 <!--mark.wxml-->
 
-<view wx:for="{{diaries}}" wx:for-index="idx">
-  <navigator url="../item/item?id={{idx}}" class="inner">
-    <image class="cover" mode="aspectFit" src="{{item.image}}"></image>
-    <view class="title">{{item.title}}</view>
-    <view class="meta">
-      {{item.meta}}
+<navigator wx:for="{{diaries}}" wx:for-index="idx" class="item-container" url="../item/item?id={{idx}}">
+  <image mode="aspectFit" src="{{item.image}}" class="cover"></image>
+  <view class="desc">
+    <view class="left">
+      <view style="font-size:32rpx;margin:10rpx 0;">{{item.title}}</view>
+      <view style="font-size:24rpx;">{{item.meta}}</view>
     </view>
-    <image class="avatar" mode="aspectFit" src="{{item.avatar}}">
-    </image>
-  </navigator>
-</view>
+    <view class="right">
+      <image mode="aspectFit" src="{{item.avatar}}"></image>
+      <view style="font-size:18rpx;margin-top:10rpx">{{item.nickname}}</view>
+    </view>
+  </view>
+</navigator>

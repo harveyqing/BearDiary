@@ -8,7 +8,7 @@
     </view>
   </block>
   <block wx:if="{{content.type == 'IMAGE'}}">
-    <image class="media" mode="aspectFill" src="{{content.content}}"></image>
+    <image class="media" mode="aspectFill" src="{{content.content}}" bindtap="enterPreviewMode" data-src="{{content.content}}"></image>
     <view style="margin-top: 10rpx">{{content.description}}</view>
   </block>
   <block wx:if="{{content.type == 'VIDEO'}}">
@@ -54,7 +54,7 @@
   </view>
 
   <!--日记正文-->
-  <view wx:for="{{diary.lists}}" wx:for-item="content" class="content">
+  <view wx:for="{{diary.list}}" wx:for-item="content" class="content">
     <template is="content-item" data="{{content}}"></template>
   </view>
 
@@ -68,3 +68,12 @@
     </view>
   </view>
 </view>
+
+<!-- 预览模式 -->
+<swiper class="swiper-container" duration="400" current="{{previewIndex}}" bindtap="leavePreviewMode" style="display:{{previewMode ? 'block' : 'none'}};">
+  <block wx:for="{{mediaList}}" wx:for-item="media">
+    <swiper-item>
+      <image src="{{media.content}}" mode="aspectFit"></image>
+    </swiper-item>
+  </block>
+</swiper>
