@@ -1,9 +1,9 @@
 <view class="container">
 </view>
 <view class="tabbar">
-  <view class="item">
+  <navigator class="item" url="../compose/compose">
     <image class="icon" mode="aspectFit" src="../../images/tabbar/text.png"></image>
-  </view>
+  </navigator>
   <view class="item">
     <image class="icon" mode="aspectFit" src="../../images/tabbar/image.png"></image>
   </view>
