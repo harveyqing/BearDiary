@@ -5,11 +5,11 @@
   <view class="desc">
     <view class="left">
       <view style="font-size:32rpx;margin:10rpx 0;">{{item.title}}</view>
-      <view style="font-size:24rpx;">{{item.meta}}</view>
+      <view style="font-size:24rpx;color:darkgray">{{item.meta}}</view>
     </view>
     <view class="right">
       <image mode="aspectFit" src="{{item.avatar}}"></image>
-      <view style="font-size:18rpx;margin-top:10rpx">{{item.nickname}}</view>
+      <view style="font-size:18rpx;margin-top:10rpx;color:darkgray">{{item.nickname}}</view>
     </view>
   </view>
 </navigator>

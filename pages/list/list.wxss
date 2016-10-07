@@ -1,7 +1,7 @@
 /** list.wxss **/
 
 .item-container {
-  margin: 0 10rpx;
+  margin: 10rpx 20rpx;
   position: relative;
 }
 
