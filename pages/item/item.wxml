@@ -27,11 +27,11 @@
     </view>
     <view class="right">
       <image mode="aspectFit" src="../../images/icons/comment.png"></image>
-      <text>{{content.commentNum}}</text>
+      <view>{{content.commentNum}}</view>
     </view>
     <view class="right">
       <image mode="aspectFit" src="../../images/icons/like.png"></image>
-      <text>{{content.likeNum}}</text>
+      <view>{{content.likeNum}}</view>
     </view>
   </view>
 </template>

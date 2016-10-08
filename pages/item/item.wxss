@@ -94,6 +94,7 @@
   height: 40rpx;
   margin-left: 20rpx;
   background-color: #E5E7ED;
+  font-size: 10rpx;
 }
 
 .content .footer .right image {
