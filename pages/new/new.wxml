@@ -1,13 +1,38 @@
-<view class="container">
-</view>
-<view class="tabbar">
-  <navigator class="item" url="../compose/compose">
-    <image class="icon" mode="aspectFit" src="../../images/tabbar/text.png"></image>
-  </navigator>
-  <view class="item">
-    <image class="icon" mode="aspectFit" src="../../images/tabbar/image.png"></image>
+<!--new.wxml-->
+
+<template name="common">
+  <view class="common-container">
   </view>
-  <view class="item">
-    <image class="icon" mode="aspectFit" src="../../images/tabbar/more.png"></image>
+
+  <view class="tabbar">
+    <view class="item" bindtap="inputTouch">
+      <image class="icon" mode="aspectFit" src="../../images/tabbar/text.png"></image>
+    </view>
+    <view class="item">
+      <image class="icon" mode="aspectFit" src="../../images/tabbar/image.png"></image>
+    </view>
+    <view class="item">
+      <image class="icon" mode="aspectFit" src="../../images/tabbar/more.png"></image>
+    </view>
   </view>
+</template>
+
+<template name="inputText">
+  <view class="input-container">
+    <view style="height:47rpx" wx:for="{{data.lines}}" wx:for-index="idx">
+      <input type="text" id="input-{{idx}}" placeholder="" bindinput="textInput" bindchange="textInputChange" value="{{item}}" auto-focus="{{idx == data.row ? true : false}}" />
+    </view>
+  </view>
+  <view class="tabbar">
+    <view class="item" style="width:50%" bindtap="inputCancel">
+      <image class="icon" mode="aspectFit" src="../../images/tabbar/cancel.png"></image>
+    </view>
+    <view class="item" style="width:50%">
+      <image class="icon" mode="aspectFit" src="../../images/tabbar/ok.png"></image>
+    </view>
+  </view>
+</template>
+
+<view style="width:100%;height:100%">
+  <template is="{{showMode}}" data="{{data}}"></template>
 </view>

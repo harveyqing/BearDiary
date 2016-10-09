@@ -40,17 +40,42 @@ Page({
 
     // data
     data: {
-        mineContentStyle: "",
+        // 展示的tab标签
         tabs: tabs,
+
+        // 当前选中的标签
         currentTab: "tab1",
+
+        // 高亮的标签索引
         highLightIndex: "0",
-        modalShowStyle: "",  // 模态对话框样式 
-        dairyTitle: "",  // 日记标题
+
+        // 模态对话框样式 
+        modalShowStyle: "",
+
+        // 待新建的日记标题
+        diaryTitle: "",
+
+        // TODO 用户信息
         userInfo: userInfo,
     },
 
-    // events
-    touchTab: function(event){  // 点击tab项事件
+    // 隐藏模态框
+    hideModal() {
+        this.setData({modalShowStyle: ""});
+    },
+
+    // 清除日记标题
+    clearTitle() {
+        this.setData({diaryTitle: ""});
+    },
+
+    onShow: function() {
+        this.hideModal();
+        this.clearTitle();
+    },
+
+    // 点击tab项事件
+    touchTab: function(event){
         var tabIndex = parseInt(event.currentTarget.id);
         var template = "tab" + (tabIndex + 1).toString();
 
@@ -70,29 +95,23 @@ Page({
 
     // 新建日记
     touchAddNew: function(event) {
-        // 先隐藏模态框
-        this.setData({
-            modalShowStyle: "",
-            dairyTitle: "",
-        })
+        this.hideModal();
 
         wx.navigateTo({
-            url: "../new/new"
+            url: "../new/new?title=" + this.data.diaryTitle,
         });
     },
 
     // 取消标题输入
     touchCancel: function(event) {
-        this.setData({
-            modalShowStyle: "",
-            dairyTitle: "",
-        })
+        this.hideModal();
+        this.clearTitle();
     }, 
 
     // 标题输入事件
     titleInput: function(event) {
         this.setData({
-            dairyTitle: event.detail.value,
+            diaryTitle: event.detail.value,
         })
     }
 })
