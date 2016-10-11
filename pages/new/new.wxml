@@ -20,14 +20,14 @@
 <template name="inputText">
   <view class="input-container">
     <view style="height:47rpx" wx:for="{{data.lines}}" wx:for-index="idx">
-      <input type="text" id="input-{{idx}}" placeholder="" bindinput="textInput" bindchange="textInputChange" value="{{item}}" auto-focus="{{idx == data.row ? true : false}}" />
+      <input type="text" data-index="{{idx}}" placeholder="" bindinput="textInput" bindchange="textInputChange" value="{{item}}" auto-focus="{{idx == data.row ? true : false}}" bindfocus="focusInput"/>
     </view>
   </view>
   <view class="tabbar">
     <view class="item" style="width:50%" bindtap="inputCancel">
       <image class="icon" mode="aspectFit" src="../../images/tabbar/cancel.png"></image>
     </view>
-    <view class="item" style="width:50%">
+    <view class="item" style="width:50%" bindtap="inputDone">
       <image class="icon" mode="aspectFit" src="../../images/tabbar/ok.png"></image>
     </view>
   </view>

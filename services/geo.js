@@ -31,6 +31,6 @@ module.exports = {
 
     // 格式化地理位置
     formatLocation(loc) {
-        return [loc.longitude, loc.latitude].map(toString).join(',');
+        return [loc.latitude, loc.longitude].map(f => f.toString()).join(',');
     },
 }
