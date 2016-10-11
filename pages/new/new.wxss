@@ -2,13 +2,13 @@
 
 .common-container {
   width: 100%;
-  height: 100%;
+  height: 92%;
 }
 
 .tabbar {
   position: fixed;
   width: 100%;
-  height: 80rpx;
+  height: 8%;
   left: 0;
   right: 0;
   bottom: 0;
@@ -31,7 +31,7 @@
 }
 
 .input-container {
-  height: 90%;
+  height: 80%;
   background-color: #eceff4;
   background-image: linear-gradient(#E1E6EA .1em, transparent .1em);
   background-size: 100% 48rpx;
@@ -45,4 +45,9 @@
   max-height: 47rpx;
   font-size: 28rpx;
   margin: 0px;
+}
+
+.action-item, .action-cacel {
+  font-size: 30rpx;
+  color: #39b5de;
 }

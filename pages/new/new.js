@@ -13,6 +13,8 @@ const MAX_CHAR = 1000;  // 最多输1000字符
 
 const TEXT = 'TEXT';
 
+var mediaActionSheetItems = ['拍照', '选择照片', '选择视频'];
+
 Page({
 
   data: {
@@ -39,17 +41,33 @@ Page({
 
     // 当前位置信息
     poi: null,
+
+    // 点击`图片`tab的action-sheet
+    mediaActionSheetHidden: true,
+
+    // 多媒体文件插入action-sheet
+    mediaActionSheetItems: mediaActionSheetItems,
+
+    // 是否显示底部tab栏
+    showTab: true,
+  },
+
+  // 数据初始化
+  init() {
+    this.getPoi();
+    this.setData({
+      data: this.data,
+    })
   },
 
   // 页面初始化
-  onLoad: function(options){
+  onLoad: function(options) {
     if (options) {
       let title = options.title;
       if (title) {this.setData({'diary.title': title});}
     }
-    this.setData({data: this.data.diary});
 
-    this.getPoi();
+    this.init();
   },
 
   // 页面渲染完成
@@ -95,7 +113,7 @@ Page({
 
   // 进入文本编辑模式
   inputTouch(event) {
-    this.setData({showMode: 'inputText', data: this.data.inputStatus});
+    this.setData({showMode: 'inputText', data: this.data});
   },
 
   // 取消文本编辑
@@ -151,15 +169,17 @@ Page({
         auto: true,  // // 自动换行的则处于输入模式
       };
 
-      this.setData({inputStatus, data: inputStatus});
+      this.setData({inputStatus, data: this.data});
       }
     }
   },
 
   // 文本框获取到焦点
   focusInput(event) {
-    let isInitialInput = this.data.inputStatus.row == 0 && this.data.inputStatus.lines[0] == 0;
-    let isAutoInput = this.data.inputStatus.mode == 'INPUT' && this.data.inputStatus.auto == true;
+    let isInitialInput = this.data.inputStatus.row == 0 &&
+                         this.data.inputStatus.lines[0] == 0;
+    let isAutoInput = this.data.inputStatus.mode == 'INPUT' &&
+                      this.data.inputStatus.auto == true;
     let mode = 'EDIT';
 
     if (isInitialInput || isAutoInput) {
@@ -167,6 +187,23 @@ Page({
     }
 
     this.setData({'inputStatus.mode': mode});
+  },
+
+  // 点击多媒体插入按钮
+  mediaTouch() {
+    this.setData({
+      showTab: false,
+      data: this.data,
+      mediaActionSheetHidden: false,
+    });
+  },
+
+  mediaActionSheetChange(event) {
+    this.setData({
+      showTab: true,
+      mediaActionSheetHidden: true,
+      data: this.data,
+    })
   },
 
   // 获得当前位置信息

@@ -4,23 +4,32 @@
   <view class="common-container">
   </view>
 
-  <view class="tabbar">
+  <view class="tabbar" style="display:{{data.showTab ? 'flex' : 'none'}};">
     <view class="item" bindtap="inputTouch">
       <image class="icon" mode="aspectFit" src="../../images/tabbar/text.png"></image>
     </view>
-    <view class="item">
+    <view class="item" bindtap="mediaTouch">
       <image class="icon" mode="aspectFit" src="../../images/tabbar/image.png"></image>
     </view>
     <view class="item">
       <image class="icon" mode="aspectFit" src="../../images/tabbar/more.png"></image>
     </view>
   </view>
+
+  <action-sheet hidden="{{data.mediaActionSheetHidden}}" bindchange="mediaActionSheetChange">
+    <block wx:for-items="{{data.mediaActionSheetItems}}">
+      <action-sheet-item class="action-item">
+        {{item}}
+      </action-sheet-item>
+    </block>
+    <action-sheet-cancel class='action-cacel'>取消</action-sheet-cancel>
+  </action-sheet>
 </template>
 
 <template name="inputText">
   <view class="input-container">
-    <view style="height:47rpx" wx:for="{{data.lines}}" wx:for-index="idx">
-      <input type="text" data-index="{{idx}}" placeholder="" bindinput="textInput" bindchange="textInputChange" value="{{item}}" auto-focus="{{idx == data.row ? true : false}}" bindfocus="focusInput"/>
+    <view style="height:47rpx" wx:for="{{data.inputStatus.lines}}" wx:for-index="idx">
+      <input type="text" data-index="{{idx}}" placeholder="" bindinput="textInput" bindchange="textInputChange" value="{{item}}" auto-focus="{{idx == data.inputStatus.row ? true : false}}" bindfocus="focusInput"/>
     </view>
   </view>
   <view class="tabbar">
