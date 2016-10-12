@@ -13,7 +13,8 @@ const MAX_CHAR = 1000;  // 最多输1000字符
 
 const TEXT = 'TEXT';
 
-var mediaActionSheetItems = ['拍照', '选择照片', '选择视频'];
+const mediaActionSheetItems = ['拍照', '选择照片', '选择视频'];
+const mediaActionSheetBinds = ['chooseImage', 'chooseImage', 'chooseImage']
 
 Page({
 
@@ -23,6 +24,12 @@ Page({
       meta: {},
       list: [],
     },
+
+    // 是否显示loading
+    showLoading: false,
+
+    // loading提示语
+    loadingMessage: '',
 
     // 页面所处模式
     showMode: 'common',
@@ -36,9 +43,6 @@ Page({
       auto: false,  // 是否有自动换行
     },
 
-    // 待传至模板对象
-    data: null,
-
     // 当前位置信息
     poi: null,
 
@@ -48,16 +52,26 @@ Page({
     // 多媒体文件插入action-sheet
     mediaActionSheetItems: mediaActionSheetItems,
 
+    // 多媒体文件插入项点击事件
+    mediaActionSheetBinds: mediaActionSheetBinds,
+
     // 是否显示底部tab栏
     showTab: true,
+  },
+
+  // 显示loading提示
+  showLoading(loadingMessage) {
+    this.setData({showLoading: true, loadingMessage});
+  },
+
+  // 隐藏loading提示
+  hideLoading() {
+    this.setData({showLoading: false, loadingMessage: ''});
   },
 
   // 数据初始化
   init() {
     this.getPoi();
-    this.setData({
-      data: this.data,
-    })
   },
 
   // 页面初始化
@@ -113,7 +127,7 @@ Page({
 
   // 进入文本编辑模式
   inputTouch(event) {
-    this.setData({showMode: 'inputText', data: this.data});
+    this.setData({showMode: 'inputText'});
   },
 
   // 取消文本编辑
@@ -137,11 +151,14 @@ Page({
         let lines = this.data.inputStatus.lines;
         let row = this.data.inputStatus.row;
         let [extra, extra_index] = [[['']], 0];
+        let hasNewLine = false;
         console.log('当前文本长度: ' + len);
 
         // 当前输入长度超过规定长度
         if (len >= ROW_CHARS) {
           // TODO 此处方案不完善
+          // 一次输入最好不超过两行
+          hasNewLine = true;
           while (input.strlen(text) > ROW_CHARS) {
             let last = text[text.length - 1];
 
@@ -149,13 +166,14 @@ Page({
               extra_index += 1;
               extra[extra_index] = [''];
             }
+
             extra[extra_index].unshift(last);
             text = text.slice(0, -1);
           }
       }
 
       lines[lines.length - 1] = text;
-      if (extra_index) {
+      if (hasNewLine) {
         extra.reverse().forEach((element, index, array) => {
           lines.push(element.join(''));
           row += 1;
@@ -169,7 +187,7 @@ Page({
         auto: true,  // // 自动换行的则处于输入模式
       };
 
-      this.setData({inputStatus, data: this.data});
+      this.setData({inputStatus});
       }
     }
   },
@@ -177,7 +195,7 @@ Page({
   // 文本框获取到焦点
   focusInput(event) {
     let isInitialInput = this.data.inputStatus.row == 0 &&
-                         this.data.inputStatus.lines[0] == 0;
+                         this.data.inputStatus.lines[0].length == 0;
     let isAutoInput = this.data.inputStatus.mode == 'INPUT' &&
                       this.data.inputStatus.auto == true;
     let mode = 'EDIT';
@@ -193,7 +211,6 @@ Page({
   mediaTouch() {
     this.setData({
       showTab: false,
-      data: this.data,
       mediaActionSheetHidden: false,
     });
   },
@@ -202,7 +219,22 @@ Page({
     this.setData({
       showTab: true,
       mediaActionSheetHidden: true,
-      data: this.data,
+    })
+  },
+
+  // 从相册选择照片或拍摄照片
+  chooseImage() {
+    wx.chooseImage({
+      count: 9,  // 最多选9张
+      sizeType: ['origin', 'compressed'],
+      sourceType: ['album', 'camera'],
+
+      success: (res) => {
+        this.setData({mediaActionSheetHidden: true});
+        this.showLoading('图片处理中...');
+
+        console.log(res);
+      }
     })
   },
 

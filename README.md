@@ -26,7 +26,7 @@ $ git clone https://github.com/harveyqing/BearDiary.git
 $ cd BearDiary
 ```
 
-2. 打开`微信Web开放者工具`（注意：必须是`0.9.092300`版本）
+2. 打开`微信Web开放者工具`（注意：必须是`v0.10.101100`版本）
 
 3. 添加项目
 

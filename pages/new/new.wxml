@@ -4,7 +4,7 @@
   <view class="common-container">
   </view>
 
-  <view class="tabbar" style="display:{{data.showTab ? 'flex' : 'none'}};">
+  <view class="tabbar" style="display:{{showTab ? 'flex' : 'none'}};">
     <view class="item" bindtap="inputTouch">
       <image class="icon" mode="aspectFit" src="../../images/tabbar/text.png"></image>
     </view>
@@ -16,9 +16,9 @@
     </view>
   </view>
 
-  <action-sheet hidden="{{data.mediaActionSheetHidden}}" bindchange="mediaActionSheetChange">
-    <block wx:for-items="{{data.mediaActionSheetItems}}">
-      <action-sheet-item class="action-item">
+  <action-sheet hidden="{{mediaActionSheetHidden}}" bindchange="mediaActionSheetChange">
+    <block wx:for-items="{{mediaActionSheetItems}}" wx:for-index="id">
+      <action-sheet-item class="action-item" bindtap="{{mediaActionSheetBinds[id]}}">
         {{item}}
       </action-sheet-item>
     </block>
@@ -28,8 +28,8 @@
 
 <template name="inputText">
   <view class="input-container">
-    <view style="height:47rpx" wx:for="{{data.inputStatus.lines}}" wx:for-index="idx">
-      <input type="text" data-index="{{idx}}" placeholder="" bindinput="textInput" bindchange="textInputChange" value="{{item}}" auto-focus="{{idx == data.inputStatus.row ? true : false}}" bindfocus="focusInput"/>
+    <view style="height:47rpx" wx:for="{{inputStatus.lines}}" wx:for-index="idx">
+      <input type="text" data-index="{{idx}}" placeholder="" bindinput="textInput" bindchange="textInputChange" value="{{item}}" auto-focus="{{idx == inputStatus.row ? true : false}}" bindfocus="focusInput"/>
     </view>
   </view>
   <view class="tabbar">
@@ -43,5 +43,13 @@
 </template>
 
 <view style="width:100%;height:100%">
-  <template is="{{showMode}}" data="{{data}}"></template>
+  <block wx:if="{{showMode == 'common'}}">
+    <template is="{{showMode}}" data="{{showTab: showTab, mediaActionSheetHidden: mediaActionSheetHidden, mediaActionSheetItems: mediaActionSheetItems, mediaActionSheetBinds: mediaActionSheetBinds}}"></template>
+  </block>
+  <block wx:if="{{showMode == 'inputText'}}">
+    <template is="{{showMode}}" data="{{inputStatus}}"></template>
+  </block>
+  <loading hidden="{{!showLoading}}" bindchange="hideLoading">
+    {{loadingMessage}}
+  </loading>
 </view>
