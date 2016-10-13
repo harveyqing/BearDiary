@@ -1,8 +1,37 @@
 /** new.wxss **/
 
+.container {
+  height: 91%;
+}
+
 .common-container {
-  width: 100%;
-  height: 92%;
+  margin: 0.1rem;
+}
+
+.item-group {
+  display: flex;
+  align-items: center;
+}
+
+.album-item {
+  flex-direction: column;
+  margin: 0.1rem;
+  background: white;
+  width: 6.4rem;
+  height: 6.4rem;
+}
+
+.content-text{
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.content-text view {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 10px;
+  line-height: 15px;
 }
 
 .tabbar {

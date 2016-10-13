@@ -1,8 +1,22 @@
 <!--new.wxml-->
 
 <template name="common">
-  <view class="common-container">
-  </view>
+  <scroll-view class="container" scroll-y="true">
+    <view class="common-container">
+      <view class="item-group" wx:for="{{layoutList}}" wx:for-item="group">
+        <block wx:for="{{group}}" wx:for-item="item">
+          <block wx:if="{{item.type == 'TEXT'}}">
+            <view class="album-item content-text">
+              <view>{{item.content}}</view>
+            </view>
+          </block>
+          <block wx:elif="{{item.type == 'IMAGE'}}">
+            <image src="{{item.content}}" class="album-item" mode="aspectFill"></image>
+          </block>
+        </block>
+      </view>
+    </view>
+  </scroll-view>
 
   <view class="tabbar" style="display:{{showTab ? 'flex' : 'none'}};">
     <view class="item" bindtap="inputTouch">
@@ -44,7 +58,7 @@
 
 <view style="width:100%;height:100%">
   <block wx:if="{{showMode == 'common'}}">
-    <template is="{{showMode}}" data="{{showTab: showTab, mediaActionSheetHidden: mediaActionSheetHidden, mediaActionSheetItems: mediaActionSheetItems, mediaActionSheetBinds: mediaActionSheetBinds}}"></template>
+    <template is="{{showMode}}" data="{{showTab: showTab, mediaActionSheetHidden: mediaActionSheetHidden, mediaActionSheetItems: mediaActionSheetItems, mediaActionSheetBinds: mediaActionSheetBinds, layoutList: layoutList}}"></template>
   </block>
   <block wx:if="{{showMode == 'inputText'}}">
     <template is="{{showMode}}" data="{{inputStatus}}"></template>

@@ -2,16 +2,22 @@
 // TODO 并不是所有非中文字符宽度都为中文字符宽度一半，需特殊处理
 // TODO 由于文本框聚焦存在bug，故编辑模式待实现
 
-const input = require('../../utils/input.js');
-const config = require('../../config.js');
-const geo = require('../../services/geo.js');
+const input = require('../../utils/input');
+const config = require('../../config');
+const geo = require('../../services/geo');
+const util = require('../../utils/util');
 
 const RESOLUTION = 750;  // 微信规定屏幕宽度为750rpx
 const MARGIN = 10;  // 写字面板左右margin
 const ROW_CHARS = Math.floor((RESOLUTION - 2 * MARGIN) / config.input.charWidth);
 const MAX_CHAR = 1000;  // 最多输1000字符
 
+// 内容布局
+const layoutColumnSize = 3;
+
+// 日记内容类型
 const TEXT = 'TEXT';
+const IMAGE = 'IMAGE'
 
 const mediaActionSheetItems = ['拍照', '选择照片', '选择视频'];
 const mediaActionSheetBinds = ['chooseImage', 'chooseImage', 'chooseImage']
@@ -24,6 +30,9 @@ Page({
       meta: {},
       list: [],
     },
+
+    // 日记内容布局列表（2x2矩阵）
+    layoutList: [],
 
     // 是否显示loading
     showLoading: false,
@@ -59,6 +68,16 @@ Page({
     showTab: true,
   },
 
+  // 显示底部tab
+  showTab() {
+    this.setData({showTab: true});
+  },
+
+  // 隐藏底部tab
+  hideTab() {
+    this.setData({showTab: false});
+  },
+
   // 显示loading提示
   showLoading(loadingMessage) {
     this.setData({showLoading: true, loadingMessage});
@@ -72,6 +91,12 @@ Page({
   // 数据初始化
   init() {
     this.getPoi();
+  },
+
+  // 设置日记数据
+  setDiary(diary) {
+    let layout = util.listToMatrix(diary.list, layoutColumnSize);
+    this.setData({diary: diary, layoutList: layout});
   },
 
   // 页面初始化
@@ -119,7 +144,7 @@ Page({
 
     if (text) {
       diary.list.push(this.makeContent(TEXT, text, ''));
-      this.setData({diary: diary});
+      this.setDiary(diary);
     }
 
     this.inputCancel();
@@ -224,6 +249,8 @@ Page({
 
   // 从相册选择照片或拍摄照片
   chooseImage() {
+    let that = this;
+
     wx.chooseImage({
       count: 9,  // 最多选9张
       sizeType: ['origin', 'compressed'],
@@ -233,7 +260,16 @@ Page({
         this.setData({mediaActionSheetHidden: true});
         this.showLoading('图片处理中...');
 
-        console.log(res);
+        console.log('图片：', res);
+        // TODO 图片上传至服务器
+        let diary = this.data.diary;
+        res.tempFilePaths.forEach((element, index, array) => {
+          diary.list.push(that.makeContent(IMAGE, element, ''))
+        });
+
+        that.setDiary(diary);
+        that.hideLoading();
+        that.showTab();
       }
     })
   },
@@ -266,6 +302,6 @@ Page({
       content: content,
       description: description,
       poi: this.data.poi,
-    }
+    };
   }
 })
