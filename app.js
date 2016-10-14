@@ -1,11 +1,25 @@
 // app.js
 
+const config = require('config');
+
 App({
 
   onLaunch: function () {
+    this.getDiaryList();
   },
 
   getUserInfo:function(cb){
+  },
+
+  getDiaryList() {
+    var that = this;
+
+    wx.getStorage({
+      key: config.storage.diaryListKey,
+      success: (res) => {
+        this.globalData.diaryList = res.data;
+      }
+    })
   },
 
   getDeviceInfo: function(callback) {
@@ -25,6 +39,7 @@ App({
 
   globalData: {
     deviceInfo: null,
+    diaryList: null,
   }
 
 })

@@ -22,6 +22,8 @@ const IMAGE = 'IMAGE'
 const mediaActionSheetItems = ['拍照', '选择照片', '选择视频'];
 const mediaActionSheetBinds = ['chooseImage', 'chooseImage', 'chooseImage']
 
+var app = getApp();
+
 Page({
 
   data: {
@@ -97,13 +99,27 @@ Page({
   setDiary(diary) {
     let layout = util.listToMatrix(diary.list, layoutColumnSize);
     this.setData({diary: diary, layoutList: layout});
+    this.saveDiary(diary);
+  },
+
+  // 保存日记
+  // TODO sync to server
+  saveDiary(diary) {
+    const key = config.storage.diaryListKey;
+    let diaryList = app.globalData.diaryList || {};
+    diaryList[diary.meta.title] = diary;
+
+    wx.setStorage({key: key, data: diaryList});
   },
 
   // 页面初始化
   onLoad: function(options) {
     if (options) {
       let title = options.title;
-      if (title) {this.setData({'diary.title': title});}
+      if (title) {this.setData({
+        'diary.meta.title': title,
+        'diary.meta.create_time': util.formatTime(new Date())
+      });}
     }
 
     this.init();
