@@ -13,19 +13,19 @@
 
 ## Demo 预览
 
-1. 概览
+* 概览
 
 <p align="center">
     <img src="./files/preview.gif" alt="小熊の日记" width="100%">
 </p>
 
-2. 多行文本
+* 多行文本
 
 <p align="center">
     <img src="./files/input.gif" alt="多行文本输入">
 </p>
 
-3. 图文编辑
+* 图文编辑
 
 <p align="center">
     <img src="./files/edit.gif" alt="图文编辑" width="100%">
