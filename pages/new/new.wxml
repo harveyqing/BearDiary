@@ -13,6 +13,9 @@
           <block wx:elif="{{item.type == 'IMAGE'}}">
             <image src="{{item.content}}" class="album-item" mode="aspectFill"></image>
           </block>
+          <block wx:elif="{{item.type == 'VIDEO'}}">
+            <video class="album-item" src="{{item.content}}"></video>
+          </block>
         </block>
       </view>
     </view>

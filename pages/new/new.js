@@ -17,10 +17,11 @@ const layoutColumnSize = 3;
 
 // 日记内容类型
 const TEXT = 'TEXT';
-const IMAGE = 'IMAGE'
+const IMAGE = 'IMAGE';
+const VIDEO = 'VIDEO';
 
 const mediaActionSheetItems = ['拍照', '选择照片', '选择视频'];
-const mediaActionSheetBinds = ['chooseImage', 'chooseImage', 'chooseImage']
+const mediaActionSheetBinds = ['chooseImage', 'chooseImage', 'chooseVideo'];
 
 var app = getApp();
 
@@ -263,6 +264,22 @@ Page({
     })
   },
 
+  // 将内容写入至日记对象
+  writeContent(res, type) {
+    let diary = this.data.diary;
+
+    if (type === IMAGE || type === VIDEO) {
+      res.tempFilePaths.forEach((element, index, array) => {
+        // TODO 内容上传至服务器
+        diary.list.push(this.makeContent(type, element, ''))
+      });
+    }
+
+    this.setDiary(diary);
+    this.hideLoading();
+    this.showTab();
+  },
+
   // 从相册选择照片或拍摄照片
   chooseImage() {
     let that = this;
@@ -275,17 +292,21 @@ Page({
       success: (res) => {
         this.setData({mediaActionSheetHidden: true});
         this.showLoading('图片处理中...');
+        that.writeContent(res, IMAGE);
+      }
+    })
+  },
 
-        console.log('图片：', res);
-        // TODO 图片上传至服务器
-        let diary = this.data.diary;
-        res.tempFilePaths.forEach((element, index, array) => {
-          diary.list.push(that.makeContent(IMAGE, element, ''))
-        });
+  // 从相册选择视频文件
+  chooseVideo() {
+    let that = this;
 
-        that.setDiary(diary);
-        that.hideLoading();
-        that.showTab();
+    wx.chooseVideo({
+      sourceType: ['album'],  // 仅从相册选择
+      success: (res) => {
+        this.setData({mediaActionSheetHidden: true});
+        this.showLoading('视频处理中...');
+        that.writeContent(res, VIDEO);
       }
     })
   },
