@@ -46,10 +46,10 @@ $ git clone https://github.com/harveyqing/BearDiary.git
 
 ## 开发计划 ##
 
-- [] 开发server端API接口
-- [] 完成日记撰写页
-- [] 添加评论、喜欢、收藏功能
-- [] 规范`coding style`
+- [ ] 开发server端API接口
+- [ ] 完成日记撰写页
+- [ ] 添加评论、喜欢、收藏功能
+- [ ] 规范`coding style`
 
 ## 小程序开发相关资源 ##
 
