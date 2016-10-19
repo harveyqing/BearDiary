@@ -94,6 +94,7 @@ Page({
   // 数据初始化
   init() {
     this.getPoi();
+    this.setMeta();
   },
 
   // 设置日记数据
@@ -107,10 +108,11 @@ Page({
   // TODO sync to server
   saveDiary(diary) {
     const key = config.storage.diaryListKey;
-    let diaryList = app.globalData.diaryList || {};
-    diaryList[diary.meta.title] = diary;
 
-    wx.setStorage({key: key, data: diaryList});
+    app.getLocalDiaries(diaries => {
+      diaries[diary.meta.title] = diary;
+      wx.setStorage({key: key, data: diaries});
+    })
   },
 
   // 页面初始化
@@ -119,7 +121,8 @@ Page({
       let title = options.title;
       if (title) {this.setData({
         'diary.meta.title': title,
-        'diary.meta.create_time': util.formatTime(new Date())
+        'diary.meta.create_time': util.formatTime(new Date()),
+        'diary.meta.cover': ''
       });}
     }
 
@@ -141,6 +144,7 @@ Page({
 
   onUnload:function(){
     // 页面关闭
+    console.log('页面跳转中...');
   },
 
   // 清除正在输入文本
@@ -275,6 +279,11 @@ Page({
       });
     }
 
+    // 设置日记封面
+    if (type === IMAGE && !this.data.diary.meta.cover) {
+      this.setData({'diary.meta.cover': res.tempFilePaths[0]});
+    }
+
     this.setDiary(diary);
     this.hideLoading();
     this.showTab();
@@ -340,5 +349,17 @@ Page({
       description: description,
       poi: this.data.poi,
     };
-  }
+  },
+
+  // 构造日记meta信息
+  setMeta() {
+    var that = this;
+    app.getUserInfo(info => {
+      that.setData({
+        'diary.meta.avatar': info.avatarUrl,
+        'diary.meta.nickName': info.nickName,
+      })
+    })
+  },
+
 })

@@ -2,9 +2,8 @@
   "pages":[
     "pages/list/list",
     "pages/mine/mine",
-    "pages/compose/compose",
     "pages/new/new",
-    "pages/item/item"
+    "pages/entry/entry"
   ],
   "window":{
     "backgroundTextStyle": "light",
