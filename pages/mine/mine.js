@@ -29,7 +29,7 @@ var tabs = [
     },
 ]
 var userInfo = {
-    avatar: "http://tva3.sinaimg.cn/crop.0.0.540.540.50/6cbb1ee0jw8ej0zou5e71j20f00f0q3b.jpg",
+    avatar: "https://pic4.zhimg.com/e515adf3b_xl.jpg",
     nickname: "小闹钟",
     sex: "♂",  // 0, male; 1, female
     meta: '1篇日记',

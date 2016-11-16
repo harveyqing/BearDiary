@@ -81,7 +81,6 @@
 
 .content .footer .left {
   display: inline-block;
-  float: left;
   height: 40rpx;
   margin: 10rpx 0;
 }
@@ -94,7 +93,7 @@
   height: 40rpx;
   margin-left: 20rpx;
   background-color: #E5E7ED;
-  font-size: 10rpx;
+  font-size: 20rpx;
 }
 
 .content .footer .right image {

@@ -272,11 +272,16 @@ Page({
   writeContent(res, type) {
     let diary = this.data.diary;
 
-    if (type === IMAGE || type === VIDEO) {
+    if (type === IMAGE) {
       res.tempFilePaths.forEach((element, index, array) => {
         // TODO 内容上传至服务器
         diary.list.push(this.makeContent(type, element, ''))
       });
+    }
+
+    if (type === VIDEO) {
+      // TODO 内容上传至服务器
+      diary.list.push(this.makeContent(type, res.tempFilePath, ''))
     }
 
     // 设置日记封面
