@@ -3,7 +3,7 @@ var diaries = [
     meta: {  // 内容元数据
       cover: "http://m.chanyouji.cn/index-cover/64695-2679221.jpg?imageView2/1/w/620/h/330/format/jpg",
       avatar: "https://pic4.zhimg.com/e515adf3b_xl.jpg",
-      title: "此刻静好，愿幸福长存",
+      title: "此刻静好，愿幸福长存3",
       meta: "2016.10.17",
       create_time: "2016.10.18 11:57:27",
       nickName: "肥肥的小狗熊",
